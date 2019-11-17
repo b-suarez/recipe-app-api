@@ -6,7 +6,7 @@ from django.contrib.auth.models import AbstractBaseUser, \
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         """Create a new user"""
-        user = self.model(email=email, **extra_fields)
+        user = self.model(email=self.normalize_email(email), **extra_fields)
         # Password needs to be encrypted, that is why we user .ser_password
         user.set_password(password)
 
